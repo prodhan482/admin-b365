@@ -1,56 +1,42 @@
-import { useState } from "react"
-
-import TextField from "../../../../../Components/common/TextField"
-import NumberInputField from "../../../../../Components/common/NumberInputField"
-import ToggleSwitch from "../../../../../Components/common/ToggleSwitch"
-import EditFormLayout from "../../../../../Components/common/EditFormLayout"
-
-import ErrorMessage from "../../../../../Components/common/ErrorMessage"
-
-import { editItem } from "../packageService"
+import { useState } from "react";
+import { parseISO } from "date-fns";
+import TextField from "../../../../../Components/common/TextField";
+import NumberInputField from "../../../../../Components/common/NumberInputField";
+import ToggleSwitch from "../../../../../Components/common/ToggleSwitch";
+import EditFormLayout from "../../../../../Components/common/EditFormLayout";
+import DateField from "../../../../../Components/common/DateField";
+import ErrorMessage from "../../../../../Components/common/ErrorMessage";
+import { editItem } from "../packageService";
 
 function EditPackage({ packages, onClose, onEditSuccess }) {
-
-  const [name, setName] = useState(packages.name)
-  const [discountAmount, setDiscountAmount] = useState(packages.discountAmount)
-  const [startDate, setStartDate] = useState(packages.startDate)
-  const [endDate, setEndDate] = useState(packages.endDate)
-  const [isActive, setIsActive] = useState(packages.isActive)
-
-  const [errorMessage, setErrorMessage] = useState("")
+  const [name, setName] = useState(packages.name);
+  const [discountAmount, setDiscountAmount] = useState(packages.discountAmount);
+  const [startDate, setStartDate] = useState(parseISO(packages.startDate));
+  const [endDate, setEndDate] = useState(parseISO(packages.endDate));
+  const [isActive, setIsActive] = useState(packages.isActive);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-
-    onClose()
+    e.preventDefault();
+    onClose();
 
     try {
-
       await editItem(packages._id, {
         name: name,
         discountAmount: discountAmount,
         isActive: isActive,
-        startDate: startDate,
-        endDate: endDate,
-      })
+        startDate: startDate.toISOString(),
+        endDate: endDate.toISOString(),
+      });
 
-      onEditSuccess()
-
+      onEditSuccess();
     } catch (error) {
-
-      setErrorMessage("Failed edit")
-
+      setErrorMessage("Failed edit");
     }
-  }
+  };
 
   return (
-
-    <EditFormLayout
-      title="Edit Package"
-      onSubmit={handleSubmit}
-      onClose={onClose}
-    >
-
+    <EditFormLayout title="Edit Package" onSubmit={handleSubmit} onClose={onClose}>
       <TextField
         id="name"
         label="Package Name"
@@ -67,35 +53,26 @@ function EditPackage({ packages, onClose, onEditSuccess }) {
         placeholder="Discount Amount"
         required
       />
-      <TextField
+      <DateField
         id="startDate"
         label="Start Date"
-        value={startDate}
-        onChange={(value) => setStartDate(value)}
+        selected={startDate}
+        onChange={(date) => setStartDate(date)}
         placeholder="Start Date"
         required
       />
-      <TextField
+      <DateField
         id="endDate"
         label="End Date"
-        value={endDate}
-        onChange={(value) => setEndDate(value)}
+        selected={endDate}
+        onChange={(date) => setEndDate(date)}
         placeholder="End Date"
         required
       />
-
-       <ToggleSwitch
-        id="isActive"
-        label="Status"
-        checked={isActive}
-        onChange={() => setIsActive(!isActive)}
-       />
-
+      <ToggleSwitch id="isActive" label="Status" checked={isActive} onChange={() => setIsActive(!isActive)} />
       <ErrorMessage message={errorMessage} />
-
     </EditFormLayout>
-
-  )
+  );
 }
 
-export default EditPackage
+export default EditPackage;

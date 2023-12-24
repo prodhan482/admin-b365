@@ -39,6 +39,7 @@ import HomeBanner from "../Pages/MainPages/WebsiteContent/HomeBanner/HomeBanner.
 import PackageProduct from "../Pages/MainPages/Order/PackageProduct/PackageProduct.jsx"
 import PromotionFAQ from "../Pages/MainPages/WebsiteContent/PromotionFAQ/PromotionFAQ.jsx";
 import PaymentType from "../Pages/MainPages/Order/PaymentType/PaymentType.jsx";
+import PromotionCard from "../Pages/MainPages/WebsiteContent/PromotionCard/PromotionCard.jsx";
 
 function PageRoutes() {
   const {employee} = useContext(AppContext)
@@ -85,6 +86,7 @@ function PageRoutes() {
         <Route path="/HomeBanner" element={employee ? <HomeBanner /> : <Navigate to='/login'/>} />
         <Route path="/PackageProduct" element={employee ? <PackageProduct /> : <Navigate to='/login'/>} />
         <Route path="/PromotionFAQs" element={employee ? <PromotionFAQ /> : <Navigate to='/login'/>} />
+        <Route path="/PromotionCard" element={employee ? <PromotionCard /> : <Navigate to='/login'/>} />
         <Route path="/PaymentType" element={employee ? <PaymentType /> : <Navigate to='/login'/>} />
       </Routes>
     </>

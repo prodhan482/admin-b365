@@ -225,7 +225,7 @@ function EditProduct() {
             onChange={setSelectedCategory}
             required
           />
-          <TextField
+          {/* <TextField
             label="Sub Category"
             value={subcategory}
             onChange={setSubCategory}
@@ -236,6 +236,18 @@ function EditProduct() {
             value={subsubcategory}
             onChange={setSubSubCategory}
             placeholder="Sub Sub Category"
+          /> */}
+           <ProductDropDown
+            label="Sub Category"
+            options={subcategory}
+            value={selectedSubCategory}
+            onChange={setSelectedSubCategory}
+          />
+          <ProductDropDown
+            label="Sub Sub Category"
+            options={subsubcategory}
+            value={selectedSubSubCategory}
+            onChange={setSelectedSubSubCategory}
           />
           <DescriptionField
             label="Short Description"

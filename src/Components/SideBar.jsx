@@ -163,6 +163,12 @@ function SideBar() {
               >
                 Promotion FAQ
               </NavLink>
+              <NavLink
+                className="text-sm font-semibold text-[#313649]"
+                to={"/PromotionCard"}
+              >
+                Promotion Card
+              </NavLink>
             </div>
           )}
         </div>

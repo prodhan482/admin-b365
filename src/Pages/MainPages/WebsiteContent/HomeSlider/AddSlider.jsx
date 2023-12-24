@@ -8,6 +8,7 @@ function AddSlider({ onClose, onSuccess }) {
   const [precedence, setPrecedence] = useState("");
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
+  const [link, setLink] = useState("");
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -30,6 +31,7 @@ function AddSlider({ onClose, onSuccess }) {
       const formData = {
         image,
         precedence,
+        link: link,
       };
       await addItem(formData);
       
@@ -46,6 +48,13 @@ function AddSlider({ onClose, onSuccess }) {
         handleImageChange={handleImageChange}
       />
       <PrecedenceField value={precedence} onChange={setPrecedence} />
+      <TextField
+        label="Link"
+        value={link}
+        onChange={setLink}
+        placeholder="Link"
+        required
+      />
     </AddFormLayout>
   );
 }

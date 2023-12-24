@@ -1,5 +1,5 @@
 import { useState } from "react"
-
+import { parseISO } from "date-fns";
 import TextField from "../../../../../Components/common/TextField"
 import NumberInputField from "../../../../../Components/common/NumberInputField"
 import EditFormLayout from "../../../../../Components/common/EditFormLayout"
@@ -15,9 +15,9 @@ function EditPromoCode({ promoCode, onClose, onEditSuccess }) {
   const [maxlimit, setMaxLimit] = useState(promoCode.maxlimit)
   const [discountType, setDiscountType] = useState(promoCode.discountType)
   const [discountAmount, setDiscountAmount] = useState(promoCode.discountAmount)
-  const [promotype, setPromoType] = useState(promoCode.discountType)
-  const [validStartDate, setValidStartDate] = useState(promoCode.validStartDate)
-  const [validEndDate, setValidEndDate] = useState(promoCode.validEndDate)
+  const [promotype, setPromoType] = useState(promoCode.promotype)
+  const [validStartDate, setValidStartDate] = useState(parseISO(promoCode.validStartDate))
+  const [validEndDate, setValidEndDate] = useState(parseISO(promoCode.validEndDate))
 
   const [errorMessage, setErrorMessage] = useState("")
 
@@ -34,8 +34,8 @@ function EditPromoCode({ promoCode, onClose, onEditSuccess }) {
         discountType: discountType,
         discountAmount: discountAmount,
         promotype: promotype,
-        validStartDate: validStartDate,
-        validEndDate: validEndDate,
+        validStartDate: validStartDate.toISOString(),
+        validEndDate: validEndDate.toISOString(),
       })
 
       onEditSuccess()
@@ -62,7 +62,7 @@ function EditPromoCode({ promoCode, onClose, onEditSuccess }) {
         required
       />
       <label htmlFor="amount">Promo Type:</label>
-      <select id="promoType" value={promotype} onChange={(value) => setPromoType(value)}>
+      <select id="promoType" value={promotype} onChange={(e) => setPromoType(e.target.value)}>
         <option value="oneTime">One Time</option>
         <option value="unlimited">unlimited</option>
       </select>
@@ -70,7 +70,7 @@ function EditPromoCode({ promoCode, onClose, onEditSuccess }) {
       <NumberInputField label="Max Limit" value={maxlimit} onChange={(value) => setMaxLimit(value)} />
 
       <label htmlFor="amount">Discount Type:</label>
-      <select id="discountType" value={discountType} onChange={(value) => setDiscountType(value)}>
+      <select id="discountType" value={discountType} onChange={(e) => setDiscountType(e.target.value)}>
         <option value="percentage">Percentage</option>
         <option value="amount">Amount</option>
       </select>

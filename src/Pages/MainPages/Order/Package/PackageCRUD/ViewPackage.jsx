@@ -3,6 +3,11 @@ import ViewDetailsField from "../../../../../Components/common/ViewDetailsField"
 import ViewDetailsLayout from "../../../../../Components/common/ViewDetailsLayout"
 
 function ViewPackage({ packages, onClose, errorMessage }) {
+
+  const formatDate = (date) => {
+    return date ? new Date(date).toISOString().split('T')[0] : '';
+  };
+
   return (
 
     <ViewDetailsLayout label={"Package Details"} onClose={onClose}>
@@ -14,11 +19,11 @@ function ViewPackage({ packages, onClose, errorMessage }) {
       />
       <ViewDetailsField
         fieldName={"Start Date"}
-        data={packages.startDate}
+        data={formatDate(packages.startDate)}
       />
       <ViewDetailsField
         fieldName={"End Date"}
-        data={packages.endDate}
+        data={formatDate(packages.endDate)}
       />
       <ViewDetailsField fieldName={"Active"} data={`${packages.isActive}`} />
 

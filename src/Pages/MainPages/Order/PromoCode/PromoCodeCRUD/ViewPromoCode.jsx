@@ -3,29 +3,36 @@ import ViewDetailsField from "../../../../../Components/common/ViewDetailsField"
 import ViewDetailsLayout from "../../../../../Components/common/ViewDetailsLayout"
 
 function ViewPromoCode({ promoCode, onClose, errorMessage }) {
+
+  const formatDate = (date) => {
+    return date ? new Date(date).toISOString().split('T')[0] : '';
+  };
+  
   return (
-
     <ViewDetailsLayout label={"Package Details"} onClose={onClose}>
-
-      <ViewDetailsField fieldName={"Start Date"} data={promoCode.validStartDate} />
-      <ViewDetailsField fieldName={"End Date"} data={promoCode.validEndDate} />
+      <ViewDetailsField fieldName={"Promo"} data={promoCode.promo} />
+      <ViewDetailsField fieldName={"Promo Type"} data={promoCode.promotype} />
+      <ViewDetailsField fieldName={"Max Limit"} data={promoCode.maxlimit} />
       <ViewDetailsField
-        fieldName={"Frequency"}
-        data={promoCode.frequency}
+        fieldName={"discount Type"}
+        data={promoCode.discountType}
       />
       <ViewDetailsField
-        fieldName={"Amount"}
-        data={promoCode.amount}
+        fieldName={"Discount Amount"}
+        data={promoCode.discountAmount}
       />
       <ViewDetailsField
-        fieldName={"UpTo"}
-        data={promoCode.upTo}
+        fieldName={"Start Date"}
+        data={formatDate(promoCode.validStartDate)}
+      />
+      <ViewDetailsField
+        fieldName={"End Date"}
+        data={formatDate(promoCode.validEndDate)}
       />
 
       <ErrorMessage message={errorMessage} />
-
-    </ViewDetailsLayout>   
-  )
+    </ViewDetailsLayout>
+  );
 }
 
 export default ViewPromoCode

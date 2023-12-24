@@ -16,6 +16,11 @@ function PromoCodeTable({
   setSelectedPromoCode,
 
 }) {
+
+  const formatDate = (date) => {
+    return date ? new Date(date).toISOString().split('T')[0] : '';
+  };
+
   return (
 
     <Table>
@@ -41,8 +46,8 @@ function PromoCodeTable({
             <TextCell text={promoCode.discountType} />
             <TextCell text={promoCode.discountAmount} />
             <TextCell text={promoCode.promotype} />
-            <TextCell text={promoCode.validStartDate} />
-            <TextCell text={promoCode.validEndDate} />
+            <TextCell text={formatDate(promoCode.validStartDate)} />
+            <TextCell text={formatDate(promoCode.validEndDate)} />
             <TableButtonCell>
               <ViewTableButton
                 onClick={() => {

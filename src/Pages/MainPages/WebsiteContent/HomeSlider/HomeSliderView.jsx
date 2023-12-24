@@ -15,6 +15,7 @@ function HomeSliderView({ data, onDelete, onEdit }) {
       <TableHeadingRow>
         <TableHeading text="Image" />
         <TableHeading text="Precedence" />
+        <TableHeading text="Link"/>
         <TableHeading align={'text-right' } text="Action" />
       </TableHeadingRow>
       <TableBody>
@@ -24,6 +25,7 @@ function HomeSliderView({ data, onDelete, onEdit }) {
               <TableImage img={e.image} />
             </ImageCell>
             <TextCell text={e.precedence} />
+            <TextCell text={e.link} />
             <TableButtonCell>
               <EditTableButton onClick={() => onEdit(e)} />
               <DeleteTableButton onClick={() => onDelete(e)} />

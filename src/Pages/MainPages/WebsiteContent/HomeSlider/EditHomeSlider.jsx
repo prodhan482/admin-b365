@@ -10,6 +10,7 @@ function EditHomeSlider({ items, onClose, onSuccess }) {
   const [precedence, setPrecedence] = useState(items.precedence);
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
+  const [link, setLink] = useState(data.link);
 
   useEffect(() => {
     if (items.image) {
@@ -36,6 +37,7 @@ function EditHomeSlider({ items, onClose, onSuccess }) {
       const formData = {
         image: image || null,
         precedence,
+        link: link,
       };
       await editItem(items._id, formData);
      
@@ -44,13 +46,24 @@ function EditHomeSlider({ items, onClose, onSuccess }) {
   };
 
   return (
-        <EditFormLayout title={"Update Slider"} onClose={onClose} onSubmit={handleSubmit}>
-          <ImageUploader
-            imagePreview={imagePreview}
-            handleImageChange={handleImageChange}
-          />
-          <PrecedenceField value={precedence} onChange={setPrecedence} />
-        </EditFormLayout>
+    <EditFormLayout
+      title={"Update Slider"}
+      onClose={onClose}
+      onSubmit={handleSubmit}
+    >
+      <ImageUploader
+        imagePreview={imagePreview}
+        handleImageChange={handleImageChange}
+      />
+      <PrecedenceField value={precedence} onChange={setPrecedence} />
+      <TextField
+        label="Link"
+        value={link}
+        onChange={(value) => setLink(value)}
+        placeholder="Link"
+        required
+      />
+    </EditFormLayout>
   );
 }
 

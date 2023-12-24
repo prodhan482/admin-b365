@@ -8,56 +8,51 @@ import DeleteTableButton from "../../../../Components/table/DeleteTableButton"
 import TableButtonCell from "../../../../Components/table/TableButtonCell"
 import TableRow from "../../../../Components/table/TableRow"
 import TableBody from "../../../../Components/table/TableBody"
+import ImageCell from "../../../../Components/table/ImageCell"
+import TableImage from "../../../../Components/table/TableImage"
 
-function PackageTable({
+function PromotionCardTable({
 
-packages,
+  promotionCard,
   setIsViewModalOpen, setIsEditModalOpen, setIsDeleteModalOpen,
-  setSelectedPackage,
+  setSelectedPromotionCard,
 
 }) {
-
-  const formatDate = (date) => {
-    return date ? new Date(date).toISOString().split('T')[0] : '';
-  };
-
   return (
 
     <Table>
 
       <TableHeadingRow>
-        <TableHeading text="Package Name" />
-        <TableHeading text="Start Date" />
-        <TableHeading text="End Date" />
-        <TableHeading text="Discount Amount" />
-        <TableHeading text="Active" />
+        <TableHeading text="Image" />
+        <TableHeading text="Category" />
+        <TableHeading text="link" />
         <TableHeading align={"text-right"} text="Action" />
       </TableHeadingRow>
 
       <TableBody>
-        {packages.map(packages => (
-          <TableRow key={packages._id} item={packages}>
-            <TextCell text={packages.name} />
-            <TextCell text={formatDate(packages.startDate)} />
-            <TextCell text={formatDate(packages.endDate)} />
-            <TextCell text={packages.discountAmount} />
-            <TextCell text={`${packages.isActive}`} />
+        {promotionCard.map(promotionCard => (
+          <TableRow key={promotionCard._id} item={promotionCard}>
+            <ImageCell>
+              <TableImage img={promotionCard.image} />
+            </ImageCell>
+            <TextCell text={promotionCard.category?.name} />
+            <TextCell text={promotionCard.link} />
             <TableButtonCell>
               <ViewTableButton
                 onClick={() => {
-                  setSelectedPackage(packages)
+                  setSelectedPromotionCard(promotionCard)
                   setIsViewModalOpen(true)
                 }}
               />
               <EditTableButton
                 onClick={() => {
-                  setSelectedPackage(packages)
+                  setSelectedPromotionCard(promotionCard)
                   setIsEditModalOpen(true)
                 }}
               />
               <DeleteTableButton
                 onClick={() => {
-                  setSelectedPackage(packages)
+                  setSelectedPromotionCard(promotionCard)
                   setIsDeleteModalOpen(true)
                 }}
               />
@@ -70,4 +65,4 @@ packages,
   )
 }
 
-export default PackageTable
+export default PromotionCardTable

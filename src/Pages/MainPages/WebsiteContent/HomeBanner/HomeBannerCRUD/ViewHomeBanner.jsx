@@ -3,7 +3,7 @@ import ViewDetailsField from "../../../../../Components/common/ViewDetailsField"
 import ViewDetailsLayout from "../../../../../Components/common/ViewDetailsLayout"
 import { IMAGE_URL } from "../../../../../Utils/Api";
 
-function ViewPromoCode({ homeBanner, onClose, errorMessage }) {
+function ViewHomeBanner({ homeBanner, onClose, errorMessage }) {
   return (
 
     <ViewDetailsLayout label={"Home Banner Details"} onClose={onClose}>
@@ -17,4 +17,4 @@ function ViewPromoCode({ homeBanner, onClose, errorMessage }) {
   )
 }
 
-export default ViewPromoCode
+export default ViewHomeBanner

@@ -46,11 +46,6 @@ function AddPromoCode({ onClose, onSuccess }) {
     }
   }
 
-  const handleFrequencyChange = (e) => {
-    setFrequency(e.target.value);
-    setContinueInput("");
-  };
-
   return (
 
     <AddFormLayout
