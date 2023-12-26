@@ -1,15 +1,20 @@
-import { useState } from "react";
-import { addItem } from "../brandService";
-import ImageUploader from "../../../../../Components/common/ImageUploader";
-import AddFormLayout from "../../../../../Components/common/AddFormLayout";
-import TextField from "../../../../../Components/common/TextField";
-import ErrorMessage from "../../../../../Components/common/ErrorMessage";
+import { useState } from "react"
+
+import AddFormLayout from "../../../../../Components/common/AddFormLayout"
+import ErrorMessage from "../../../../../Components/common/ErrorMessage"
+
+import { addItem } from "../brandService"
+import TextField from "../../../../../Components/common/TextField"
+import ImageUploader from "../../../../../Components/common/ImageUploader"
 
 function AddBrand({ onClose, onSuccess }) {
+
   const [name, setName] = useState("");
+  const [link, setLink] = useState("");
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
-  const [errorMessage, setErrorMessage] = useState("");
+
+  const [errorMessage, setErrorMessage] = useState("")
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -32,14 +37,17 @@ function AddBrand({ onClose, onSuccess }) {
       const formData = {
         image,
         name,
+        link,
       };
       await addItem(formData);
-      
+
       onSuccess();
     } catch (error) {
-      setErrorMessage("Add Failed");
+
+      setErrorMessage("Failed edit")
     }
-  };
+
+  }
 
   return (
     <AddFormLayout title="Add Brand" onSubmit={handleSubmit} onClose={onClose}>
@@ -47,16 +55,24 @@ function AddBrand({ onClose, onSuccess }) {
         imagePreview={imagePreview}
         handleImageChange={handleImageChange}
       />
-      <TextField
-        label="Name"
-        value={name}
-        onChange={setName}
-        placeholder="Name"
-        required
+      <TextField label="Name"
+            value={name}
+            onChange={setName}
+            placeholder="Name"
+            required 
       />
+      <TextField label="Link"
+            value={link}
+            onChange={setLink}
+            placeholder="Link"
+            required
+       />
+
       <ErrorMessage message={errorMessage} />
     </AddFormLayout>
-  );
+
+  )
 }
 
-export default AddBrand;
+export default AddBrand
+

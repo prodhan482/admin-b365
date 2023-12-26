@@ -64,8 +64,8 @@ function EditPromotionCard({ promotionCard, onClose, onEditSuccess }) {
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const [link, setLink] = useState(promotionCard.link);
-  const [categories, setCategories] = useState([promotionCard.categories]);
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(promotionCard.selectedCategory);
 
   const [errorMessage, setErrorMessage] = useState("")
 

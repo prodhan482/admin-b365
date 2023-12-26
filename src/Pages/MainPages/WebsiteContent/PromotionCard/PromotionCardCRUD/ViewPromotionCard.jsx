@@ -6,7 +6,7 @@ import { IMAGE_URL } from "../../../../../Utils/Api";
 function ViewPromotionCard({ promotionCard, onClose, errorMessage }) {
   return (
 
-    <ViewDetailsLayout label={"Home Promotion Card Details"} onClose={onClose}>
+    <ViewDetailsLayout label={"Promotion Card Details"} onClose={onClose}>
 
       <img src={`${IMAGE_URL}${promotionCard.image}`}  className="w-full h-40 mb-2" />
       <ViewDetailsField fieldName={"Ctegory"} data={promotionCard.category?.name} />

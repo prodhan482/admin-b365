@@ -19,6 +19,7 @@ export async function addItem(formData) {
   const formDataObj = new FormData();
   formDataObj.append('image', formData.image);
   formDataObj.append('name', formData.name);
+  formDataObj.append('link', formData.link);
   const response = await axios.post(`${PRODUCTSGROUP_API}/brands`, formDataObj, { headers })
   return response.data
 }
@@ -30,6 +31,7 @@ export async function editItem(id, data) {
   }
 
   formDataObj.append('name', data.name);
+  formDataObj.append('link', data.link);
 
   const response = await axios.patch(`${PRODUCTSGROUP_API}/brands/${id}`, formDataObj, { headers });
 

@@ -1,22 +1,29 @@
-import { useState, useEffect } from "react";
-import { editItem } from "../brandService";
-import { IMAGE_URL } from "../../../../../Utils/Api";
-import ImageUploader from "../../../../../Components/common/ImageUploader";
-import EditFormLayout from "../../../../../Components/common/EditFormLayout";
-import TextField from "../../../../../Components/common/TextField";
-import ErrorMessage from "../../../../../Components/common/ErrorMessage";
+import { useState,useEffect } from "react"
 
-function EditBrand({ items, onClose, onSuccess }) {
-  const [name, setName] = useState(items.name);
+import TextField from "../../../../../Components/common/TextField"
+import ImageUploader from "../../../../../Components/common/ImageUploader"
+import EditFormLayout from "../../../../../Components/common/EditFormLayout"
+import { IMAGE_URL } from "../../../../../Utils/Api";
+
+import ErrorMessage from "../../../../../Components/common/ErrorMessage"
+
+import { editItem } from "../brandService"
+
+
+function EditBrand({ brand, onClose, onEditSuccess }) {
+
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [name, setName] = useState(brand.name)
+  const [link, setLink] = useState(brand.link)
+
+  const [errorMessage, setErrorMessage] = useState("")
 
   useEffect(() => {
-    if (items.image) {
-      setImagePreview(`${IMAGE_URL}${items.image}`);
+    if (brand.image) {
+      setImagePreview(`${IMAGE_URL}${brand.image}`);
     }
-  }, [items.image]);
+  }, [brand.image]);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -29,7 +36,7 @@ function EditBrand({ items, onClose, onSuccess }) {
       reader.readAsDataURL(file);
     }
   };
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     onClose();
@@ -37,35 +44,32 @@ function EditBrand({ items, onClose, onSuccess }) {
       const formData = {
         image: image || null,
         name,
+        link
       };
-      await editItem(items._id, formData);
-
-      onSuccess();
+      await editItem(brand._id, formData);
+     
+      onEditSuccess();
     } catch (error) {
-      setErrorMessage("Failed edit");
-    }
-  };
 
+      setErrorMessage("Failed edit")
+  }
+
+  }
   return (
-    <EditFormLayout
-      title={"Edit Brand"}
-      onClose={onClose}
-      onSubmit={handleSubmit}
-    >
-      <ImageUploader
-        imagePreview={imagePreview}
-        handleImageChange={handleImageChange}
-      />
-      <TextField
-        label="Name"
-        value={name}
-        onChange={setName}
-        placeholder="name"
-        required
-      />
-       <ErrorMessage message={errorMessage} />
+
+    <EditFormLayout title={"Update Brand"} onClose={onClose} onSubmit={handleSubmit}>
+          <ImageUploader
+            imagePreview={imagePreview}
+            handleImageChange={handleImageChange}
+          />
+          <TextField value={name} onChange={setName} />
+          <TextField value={link} onChange={setLink} />
+  
+          <ErrorMessage message={errorMessage} />
+
     </EditFormLayout>
-  );
+
+  )
 }
 
-export default EditBrand;
+export default EditBrand

@@ -1,15 +1,21 @@
-import ViewDetailsField from "../../../../../Components/common/ViewDetailsField";
-import ViewDetailsLayout from "../../../../../Components/common/ViewDetailsLayout";
-import ErrorMessage from "../../../../../Components/common/ErrorMessage";
+import ErrorMessage from "../../../../../Components/common/ErrorMessage"
+import ViewDetailsField from "../../../../../Components/common/ViewDetailsField"
+import ViewDetailsLayout from "../../../../../Components/common/ViewDetailsLayout"
 import { IMAGE_URL } from "../../../../../Utils/Api";
-function ViewBrand({ data, onClose, errorMessage  }) {
+
+function ViewBrand({ brand, onClose, errorMessage }) {
   return (
-    <ViewDetailsLayout label={"App Settings Details"} onClose={onClose}>
-      <img src={`${IMAGE_URL}${data.image}`}  className="w-full h-40 mb-2" />
-      <ViewDetailsField fieldName={"Name"} data={data.name} />
+
+    <ViewDetailsLayout label={"Brand Details"} onClose={onClose}>
+
+      <img src={`${IMAGE_URL}${brand.image}`}  className="w-full h-40 mb-2" />
+      <ViewDetailsField fieldName={"Name"} data={brand.name} />
+      <ViewDetailsField fieldName={"Link"} data={brand.link} />
+
       <ErrorMessage message={errorMessage} />
-    </ViewDetailsLayout>
-  );
+
+    </ViewDetailsLayout>   
+  )
 }
 
-export default ViewBrand;
+export default ViewBrand

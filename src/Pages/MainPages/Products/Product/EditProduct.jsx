@@ -23,8 +23,10 @@ function EditProduct() {
     price: "",
     qty: "",
     employee: "",
-    subcategory: [],
-    subsubcategory: [],
+    subcategories: [],
+    selectedSubCategory:"",
+    subsubcategories: [],
+    selectedSubSubCategory:"",
     shortDescription: "",
     description: "",
     visibility: Boolean,
@@ -48,9 +50,9 @@ function EditProduct() {
   const [price, setPrice] = useState("");
   const [qty, setQty] = useState("");
   const [employee, setEmployee] = useState("");
-  const [subcategory, setSubCategory] = useState([]);
+  const [subcategories, setSubCategories] = useState([]);
   const [selectedSubCategory, setSelectedSubCategory] = useState();
-  const [subsubcategory, setSubSubCategory] = useState("");
+  const [subsubcategories, setSubSubCategories] = useState([]);
   const [selectedSubSubCategory, setSelectedSubSubCategory] = useState();
   const [shortDescription, setShortDescription] = useState("");
   const [description, setDescription] = useState("");
@@ -59,7 +61,7 @@ function EditProduct() {
   const [brand, setBrand] = useState([]);
   const [selectedBrand, setSelectedBrand] = useState("");
   const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState();
   const [plasticTypes, setPlasticTypes] = useState([]);
   const [selectedPlasticType, setSelectedPlasticType] = useState("");
   const [isPlastic, setIsPlastic] = useState(false);
@@ -88,8 +90,8 @@ function EditProduct() {
         setPrice(singleItem.price);
         setQty(singleItem.quantity);
         setEmployee(singleItem.employee);
-        setSubCategory(singleItem.subcategory);
-        setSubSubCategory(singleItem.subsubcategory);
+        setSelectedSubCategory(singleItem.subcategory._id);
+        setSelectedSubSubCategory(singleItem.subsubcategory._id);
         setShortDescription(singleItem.shortDescription);
         setDescription(singleItem.description);
         setVisibility(singleItem.visibility);
@@ -116,8 +118,8 @@ function EditProduct() {
         setPlasticTypes(plasticTypeData);
         setBrand(brandData);
         setCategories(catData);
-        setSubCategory(subCategoryData);
-        setSubSubCategory(subSubCategoryData);
+        setSubCategories(subCategoryData);
+        setSubSubCategories(subSubCategoryData);
       } catch (error) {
         console.error("Error fetching brands:", error);
       }
@@ -239,15 +241,17 @@ function EditProduct() {
           /> */}
            <ProductDropDown
             label="Sub Category"
-            options={subcategory}
+            options={subcategories}
             value={selectedSubCategory}
             onChange={setSelectedSubCategory}
+            required
           />
           <ProductDropDown
             label="Sub Sub Category"
-            options={subsubcategory}
+            options={subsubcategories}
             value={selectedSubSubCategory}
             onChange={setSelectedSubSubCategory}
+            required
           />
           <DescriptionField
             label="Short Description"

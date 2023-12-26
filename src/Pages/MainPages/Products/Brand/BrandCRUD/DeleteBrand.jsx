@@ -1,28 +1,35 @@
-import { deleteItem } from "../brandService";
-import DeleteConfirm from "../../../../../Components/common/DeleteConfirm";
-import { useState } from "react";
+import { useState } from "react"
 
-function DeleteBrand({ item, onClose, onDeleteSuccess }) {
-  const [errorMessage, setErrorMessage] = useState("");
+import DeleteConfirm from "../../../../../Components/common/DeleteConfirm"
+
+import { deleteItem } from "../brandService"
+
+function DeleteBrand({ brand, onClose, onDeleteSuccess }) {
+
+  const [errorMessage, setErrorMessage] = useState("")
+
   const handleDelete = async (id) => {
     try {
-      await deleteItem(id);
 
-      onDeleteSuccess();
-      onClose();
+      await deleteItem(id)
+      onDeleteSuccess()
+      onClose()
+
     } catch (error) {
-      setErrorMessage("Delete Failed");
+      
+      setErrorMessage("Delete Failed")
+
     }
-  };
+  }
   return (
     <DeleteConfirm
-      title={"Delete App Setting"}
+      title={"Delete Brand"}
       handleDelete={handleDelete}
-      id={item._id}
+      id={brand._id}
       onClose={onClose}
       errorMessage={errorMessage}
     />
-  );
+  )
 }
 
-export default DeleteBrand;
+export default DeleteBrand
