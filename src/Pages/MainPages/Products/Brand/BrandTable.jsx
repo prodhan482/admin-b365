@@ -10,6 +10,8 @@ import TableRow from "../../../../Components/table/TableRow"
 import TableBody from "../../../../Components/table/TableBody"
 import ImageCell from "../../../../Components/table/ImageCell"
 import TableImage from "../../../../Components/table/TableImage"
+import ViewDetailsButton from "../../../../Components/common/ViewDetailsButton"
+import { useNavigate } from "react-router-dom";
 
 function BrandTable({
 
@@ -18,6 +20,7 @@ function BrandTable({
   setSelectedBrand,
 
 }) {
+  const navigate = useNavigate();
   return (
 
     <Table>
@@ -38,6 +41,11 @@ function BrandTable({
             <TextCell text={brand.name} />
             <TextCell text={brand.link} />
             <TableButtonCell>
+            <ViewDetailsButton
+            label="View Product"
+            onClick={() => navigate(`/ViewProductByBrand/${brand._id}`)}
+           
+            />
               <ViewTableButton
                 onClick={() => {
                   setSelectedBrand(brand)

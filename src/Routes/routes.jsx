@@ -40,6 +40,7 @@ import PackageProduct from "../Pages/MainPages/Order/PackageProduct/PackageProdu
 import PromotionFAQ from "../Pages/MainPages/WebsiteContent/PromotionFAQ/PromotionFAQ.jsx";
 import PaymentType from "../Pages/MainPages/Order/PaymentType/PaymentType.jsx";
 import PromotionCard from "../Pages/MainPages/WebsiteContent/PromotionCard/PromotionCard.jsx";
+import ViewProductByBrand from "../Pages/MainPages/Products/Brand/BrandCRUD/ViewProductByBrand";
 
 function PageRoutes() {
   const {employee} = useContext(AppContext)
@@ -88,6 +89,7 @@ function PageRoutes() {
         <Route path="/PromotionFAQs" element={employee ? <PromotionFAQ /> : <Navigate to='/login'/>} />
         <Route path="/PromotionCard" element={employee ? <PromotionCard /> : <Navigate to='/login'/>} />
         <Route path="/PaymentType" element={employee ? <PaymentType /> : <Navigate to='/login'/>} />
+        <Route path="/ViewProductByBrand/:id" element={employee ? <ViewProductByBrand /> : <Navigate to='/login'/>} />
       </Routes>
     </>
   ); 

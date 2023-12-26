@@ -41,3 +41,7 @@ export async function deleteItem(id) {
   const response = await axios.delete(`${PRODUCTSGROUP_API}/brands/${id}`, { headers })
   return response.data
 }
+export async function getpProductByBrand(id) {
+  const response = await axios.get(`${PRODUCTSGROUP_API}/brands/productByBrand/${id}`);
+  return response.data;
+}
